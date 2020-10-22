@@ -37,9 +37,10 @@ public class Matrix {
       this.rows != anotherMatrix.rows || this.columns != anotherMatrix.columns
     ) return null;
 
-    for (int i = 0; i < this.rows; i++) {
-      for (int j = 0; j < this.columns; j++) {
-        newMatrix.matrix[i][j] = this.matrix[i][j] + anotherMatrix.matrix[i][j];
+    for (int rowNo = 0; rowNo < this.rows; rowNo++) {
+      for (int colNo = 0; colNo < this.columns; colNo++) {
+        newMatrix.matrix[rowNo][colNo] =
+          this.matrix[rowNo][colNo] + anotherMatrix.matrix[rowNo][colNo];
       }
     }
     return newMatrix;
@@ -52,9 +53,10 @@ public class Matrix {
       this.rows != anotherMatrix.rows || this.columns != anotherMatrix.columns
     ) return null;
 
-    for (int i = 0; i < this.rows; i++) {
-      for (int j = 0; j < this.columns; j++) {
-        newMatrix.matrix[i][j] = this.matrix[i][j] - anotherMatrix.matrix[i][j];
+    for (int rowNo = 0; rowNo < this.rows; rowNo++) {
+      for (int colNo = 0; colNo < this.columns; colNo++) {
+        newMatrix.matrix[rowNo][colNo] =
+          this.matrix[rowNo][colNo] - anotherMatrix.matrix[rowNo][colNo];
       }
     }
     return newMatrix;
@@ -63,10 +65,10 @@ public class Matrix {
   public Matrix multiply(int multiplier) {
     Matrix newMatrix = new Matrix(this.rows, this.columns);
 
-    for (int rows = 0; rows < this.rows; rows++) {
-      for (int columns = 0; columns < this.columns; columns++) {
-        newMatrix.matrix[rows][columns] =
-          this.matrix[rows][columns] * multiplier;
+    for (int rowNo = 0; rowNo < this.rows; rowNo++) {
+      for (int colNo = 0; colNo < this.columns; colNo++) {
+        newMatrix.matrix[rowNo][colNo] =
+          this.matrix[rowNo][colNo] * multiplier;
       }
     }
     return newMatrix;
@@ -77,12 +79,12 @@ public class Matrix {
 
     if (this.columns != anotherMatrix.rows) return null;
 
-    for (int row = 0; row < newMatrix.rows; row++) {
-      for (int cell = 0; cell < newMatrix.columns; cell++) {
-        newMatrix.matrix[row][cell] = 0;
+    for (int rowNo = 0; rowNo < newMatrix.rows; rowNo++) {
+      for (int colNo = 0; colNo < newMatrix.columns; colNo++) {
+        newMatrix.matrix[rowNo][colNo] = 0;
         for (int i = 0; i < this.columns; i++) {
-          newMatrix.matrix[row][cell] +=
-            this.matrix[row][i] * anotherMatrix.matrix[i][cell];
+          newMatrix.matrix[rowNo][colNo] +=
+            this.matrix[rowNo][i] * anotherMatrix.matrix[i][colNo];
         }
       }
     }
@@ -118,11 +120,13 @@ public class Matrix {
         this.matrix[1][0]
       );
     }
-    int determinant = 0;
-    for (int columns = 0; columns < this.columns; columns++) {
-      int sign = columns % 2 != 0 ? -1 : 1;
+    Integer determinant = new Integer(0);
+    for (int colNo = 0; colNo < this.columns; colNo++) {
+      int sign = colNo % 2 != 0 ? -1 : 1;
       determinant +=
-        sign * this.matrix[0][columns] * this.getSubMatrix(0, columns).getDeterminant();
+        sign *
+        this.matrix[0][colNo] *
+        this.getSubMatrix(0, colNo).getDeterminant();
     }
     return determinant;
   }
@@ -149,8 +153,8 @@ public class Matrix {
     ) return false;
 
     for (int rowNo = 0; rowNo < matrix.rows; rowNo++) {
-      for (int cell = 0; cell < matrix.columns; cell++) {
-        if (this.matrix[rowNo][cell] != matrix.matrix[rowNo][cell]) {
+      for (int colNo = 0; colNo < matrix.columns; colNo++) {
+        if (this.matrix[rowNo][colNo] != matrix.matrix[rowNo][colNo]) {
           return false;
         }
       }
