@@ -89,6 +89,44 @@ public class Matrix {
     return newMatrix;
   }
 
+  private Matrix getSubMatrix(int rIdx, int cIdx) {
+    int[][] subMatrixValues = new int[this.rows - 1][this.columns - 1];
+    for (int rowNo = 0, sRow = 0; rowNo < this.rows; rowNo++) {
+      if (rowNo == rIdx) {
+        continue;
+      }
+      for (int colNo = 0, sCol = 0; colNo < this.columns; colNo++) {
+        if (colNo == cIdx) {
+          continue;
+        }
+        subMatrixValues[sRow][sCol] = this.matrix[rowNo][colNo];
+        sCol++;
+      }
+      sRow++;
+    }
+    Matrix subMatrix = Matrix.createMatrix(subMatrixValues);
+    return subMatrix;
+  }
+
+  public Integer getDeterminant() {
+    if (this.rows != this.columns) return null;
+    if (this.rows == 2) {
+      return (
+        this.matrix[0][0] *
+        this.matrix[1][1] -
+        this.matrix[0][1] *
+        this.matrix[1][0]
+      );
+    }
+    int determinant = 0;
+    for (int columns = 0; columns < this.columns; columns++) {
+      int sign = columns % 2 != 0 ? -1 : 1;
+      determinant +=
+        sign * this.matrix[0][columns] * this.getSubMatrix(0, columns).getDeterminant();
+    }
+    return determinant;
+  }
+
   @Override
   public String toString() {
     String matrix = "";

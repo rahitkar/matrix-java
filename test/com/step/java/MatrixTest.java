@@ -168,4 +168,26 @@ public class MatrixTest {
       actual
     );
   }
+
+  @Test
+  public void getDeterminant() {
+    int[][] values = { { 1, 2 }, { 3, 4 } };
+    Matrix mt = Matrix.createMatrix(values);
+
+    int actual = mt.getDeterminant();
+    assertEquals("should return the determinant value of given 2X2 matrix", -2, actual);
+
+    int[][] anotherValues = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    Matrix anotherMt = Matrix.createMatrix(anotherValues);
+    actual = anotherMt.getDeterminant();
+    assertEquals("should return the determinant value of given 3X3 matrix",0, actual);
+  }
+
+  public void getDeterminantOfNotSquareMatrix() {
+    int[][] values = { { 1, 2 }, { 3, 4 } };
+    Matrix mt = Matrix.createMatrix(values);
+
+    int actual = mt.getDeterminant();
+    assertNull("should return null for given not square matrix", actual);
+  }
 }
