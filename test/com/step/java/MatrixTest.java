@@ -1,6 +1,7 @@
 package com.step.java;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -32,9 +33,8 @@ public class MatrixTest {
 
     Matrix actual = mt.add(anotherMt);
 
-    assertEquals(
+    assertNull(
       "should return null for given different row sized matrix",
-      null,
       actual
     );
   }
@@ -48,9 +48,8 @@ public class MatrixTest {
 
     Matrix actual = mt.add(anotherMt);
 
-    assertEquals(
+    assertNull(
       "should return null for given different column sized matrix",
-      null,
       actual
     );
   }
@@ -81,9 +80,8 @@ public class MatrixTest {
 
     Matrix actual = mt.sub(anotherMt);
 
-    assertEquals(
+    assertNull(
       "should return null for given different row sized matrix",
-      null,
       actual
     );
   }
@@ -97,9 +95,8 @@ public class MatrixTest {
 
     Matrix actual = mt.sub(anotherMt);
 
-    assertEquals(
+    assertNull(
       "should return null for given different column sized matrix",
-      null,
       actual
     );
   }
@@ -146,9 +143,8 @@ public class MatrixTest {
 
     Matrix actual = mt.multiply(anotherMt);
 
-    assertEquals(
+    assertNull(
       "should return null for given different row sized matrix",
-      null,
       actual
     );
   }
