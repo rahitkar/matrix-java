@@ -7,7 +7,7 @@ import org.junit.Test;
 public class MatrixTest {
 
   @Test
-  public void isAdded() {
+  public void add() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
@@ -24,7 +24,39 @@ public class MatrixTest {
   }
 
   @Test
-  public void isSubtracted() {
+  public void addWithDifferentRowSize() {
+    int[][] values = { { 1, 2 }, { 3, 4 } };
+    Matrix mt = Matrix.createMatrix(values);
+    int[][] anotherValues = { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+    Matrix anotherMt = Matrix.createMatrix(anotherValues);
+
+    Matrix actual = mt.add(anotherMt);
+
+    assertEquals(
+      "should return null for given different row sized matrix",
+      null,
+      actual
+    );
+  }
+
+  @Test
+  public void addWithDifferentColumnSize() {
+    int[][] values = { { 1, 2 }, { 3, 4 } };
+    Matrix mt = Matrix.createMatrix(values);
+    int[][] anotherValues = { { 1, 2, 3 }, { 4, 5, 6 } };
+    Matrix anotherMt = Matrix.createMatrix(anotherValues);
+
+    Matrix actual = mt.add(anotherMt);
+
+    assertEquals(
+      "should return null for given different column sized matrix",
+      null,
+      actual
+    );
+  }
+
+  @Test
+  public void sub() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
@@ -41,7 +73,39 @@ public class MatrixTest {
   }
 
   @Test
-  public void isMultipliedWithInt() {
+  public void subWithDifferentRowSize() {
+    int[][] values = { { 1, 2 }, { 3, 4 } };
+    Matrix mt = Matrix.createMatrix(values);
+    int[][] anotherValues = { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+    Matrix anotherMt = Matrix.createMatrix(anotherValues);
+
+    Matrix actual = mt.sub(anotherMt);
+
+    assertEquals(
+      "should return null for given different row sized matrix",
+      null,
+      actual
+    );
+  }
+
+  @Test
+  public void subWithDifferentColumnSize() {
+    int[][] values = { { 1, 2 }, { 3, 4 } };
+    Matrix mt = Matrix.createMatrix(values);
+    int[][] anotherValues = { { 1, 2, 3 }, { 4, 5, 6 } };
+    Matrix anotherMt = Matrix.createMatrix(anotherValues);
+
+    Matrix actual = mt.sub(anotherMt);
+
+    assertEquals(
+      "should return null for given different column sized matrix",
+      null,
+      actual
+    );
+  }
+
+  @Test
+  public void multiplyWithInt() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
 
@@ -57,7 +121,7 @@ public class MatrixTest {
   }
 
   @Test
-  public void isMultipliedWithMatrix() {
+  public void multiplyWithMatrix() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
@@ -69,6 +133,22 @@ public class MatrixTest {
     assertEquals(
       "should return a new matrix with the new values after multiplying with given matrix",
       expected,
+      actual
+    );
+  }
+
+  @Test
+  public void multiplyWithDifferentRowSizeMatrix() {
+    int[][] values = { { 1, 2, 3 }, { 4, 5, 6 } };
+    Matrix mt = Matrix.createMatrix(values);
+    int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
+    Matrix anotherMt = Matrix.createMatrix(anotherValues);
+
+    Matrix actual = mt.multiply(anotherMt);
+
+    assertEquals(
+      "should return null for given different row sized matrix",
+      null,
       actual
     );
   }
