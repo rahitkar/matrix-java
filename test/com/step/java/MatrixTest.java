@@ -1,11 +1,31 @@
 package com.step.java;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
 public class MatrixTest {
+
+  @Test
+  public void createMatrix() {
+    int[][] values = { { 1, 2 }, { 3, 4 } };
+    Matrix mt = Matrix.createMatrix(values);
+
+    assertNotNull("should return a instance of Matrix class", mt);
+  }
+
+  @Test
+  public void createMatrixWithDifferentSizeColumns() {
+    int[][] values = { { 1, 2 }, { 3, 4, 5 } };
+    Matrix mt = Matrix.createMatrix(values);
+
+    assertNull(
+      "should return null for given list with different size of columns",
+      mt
+    );
+  }
 
   @Test
   public void add() {
