@@ -8,12 +8,12 @@ package com.step.java;
 public class Matrix {
   private final int rows;
   private final int columns;
-  private int[][] matrix;
+  private int[][] values;
 
   public Matrix(int rows, int columns) {
     this.rows = rows;
     this.columns = columns;
-    this.matrix = new int[rows][columns];
+    this.values = new int[rows][columns];
   }
 
   public static Matrix createMatrix(int[][] rows) {
@@ -23,8 +23,8 @@ public class Matrix {
       if (rows[rowNo].length != newMatrix.columns) {
         return null;
       }
-      for (int cell = 0; cell < newMatrix.columns; cell++) {
-        newMatrix.matrix[rowNo][cell] = rows[rowNo][cell];
+      for (int colNo = 0; colNo < newMatrix.columns; colNo++) {
+        newMatrix.values[rowNo][colNo] = rows[rowNo][colNo];
       }
     }
     return newMatrix;
@@ -39,8 +39,8 @@ public class Matrix {
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
-        newMatrix.matrix[rowNo][colNo] =
-          this.matrix[rowNo][colNo] + anotherMatrix.matrix[rowNo][colNo];
+        newMatrix.values[rowNo][colNo] =
+          this.values[rowNo][colNo] + anotherMatrix.values[rowNo][colNo];
       }
     }
     return newMatrix;
@@ -55,8 +55,8 @@ public class Matrix {
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
-        newMatrix.matrix[rowNo][colNo] =
-          this.matrix[rowNo][colNo] - anotherMatrix.matrix[rowNo][colNo];
+        newMatrix.values[rowNo][colNo] =
+          this.values[rowNo][colNo] - anotherMatrix.values[rowNo][colNo];
       }
     }
     return newMatrix;
@@ -67,8 +67,7 @@ public class Matrix {
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
-        newMatrix.matrix[rowNo][colNo] =
-          this.matrix[rowNo][colNo] * multiplier;
+        newMatrix.values[rowNo][colNo] = this.values[rowNo][colNo] * multiplier;
       }
     }
     return newMatrix;
@@ -81,10 +80,10 @@ public class Matrix {
 
     for (int rowNo = 0; rowNo < newMatrix.rows; rowNo++) {
       for (int colNo = 0; colNo < newMatrix.columns; colNo++) {
-        newMatrix.matrix[rowNo][colNo] = 0;
+        newMatrix.values[rowNo][colNo] = 0;
         for (int i = 0; i < this.columns; i++) {
-          newMatrix.matrix[rowNo][colNo] +=
-            this.matrix[rowNo][i] * anotherMatrix.matrix[i][colNo];
+          newMatrix.values[rowNo][colNo] +=
+            this.values[rowNo][i] * anotherMatrix.values[i][colNo];
         }
       }
     }
@@ -101,7 +100,7 @@ public class Matrix {
         if (colNo == cIdx) {
           continue;
         }
-        subMatrixValues[sRow][sCol] = this.matrix[rowNo][colNo];
+        subMatrixValues[sRow][sCol] = this.values[rowNo][colNo];
         sCol++;
       }
       sRow++;
@@ -114,10 +113,10 @@ public class Matrix {
     if (this.rows != this.columns) return null;
     if (this.rows == 2) {
       return (
-        this.matrix[0][0] *
-        this.matrix[1][1] -
-        this.matrix[0][1] *
-        this.matrix[1][0]
+        this.values[0][0] *
+        this.values[1][1] -
+        this.values[0][1] *
+        this.values[1][0]
       );
     }
     Integer determinant = new Integer(0);
@@ -125,7 +124,7 @@ public class Matrix {
       int sign = colNo % 2 != 0 ? -1 : 1;
       determinant +=
         sign *
-        this.matrix[0][colNo] *
+        this.values[0][colNo] *
         this.getSubMatrix(0, colNo).getDeterminant();
     }
     return determinant;
@@ -134,7 +133,7 @@ public class Matrix {
   @Override
   public String toString() {
     String matrix = "";
-    for (int row[] : this.matrix) {
+    for (int row[] : this.values) {
       for (int cell : row) {
         matrix += cell + " ";
       }
@@ -154,7 +153,7 @@ public class Matrix {
 
     for (int rowNo = 0; rowNo < matrix.rows; rowNo++) {
       for (int colNo = 0; colNo < matrix.columns; colNo++) {
-        if (this.matrix[rowNo][colNo] != matrix.matrix[rowNo][colNo]) {
+        if (this.values[rowNo][colNo] != matrix.values[rowNo][colNo]) {
           return false;
         }
       }
