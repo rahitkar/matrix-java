@@ -35,59 +35,59 @@ public class Matrix {
   }
 
   public Matrix add(Matrix anotherMatrix) {
-    Matrix newMatrix = new Matrix(this.rows, this.columns);
-
     if (isValid(anotherMatrix)) return null;
+
+    int[][] newMatrixValues = new int[this.rows][this.columns];
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
-        newMatrix.values[rowNo][colNo] =
+        newMatrixValues[rowNo][colNo] =
           this.values[rowNo][colNo] + anotherMatrix.values[rowNo][colNo];
       }
     }
-    return newMatrix;
+    return createMatrix(newMatrixValues);
   }
 
   public Matrix sub(Matrix anotherMatrix) {
-    Matrix newMatrix = new Matrix(this.rows, this.columns);
-
     if (isValid(anotherMatrix)) return null;
+
+    int[][] newMatrixValues = new int[this.rows][this.columns];
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
-        newMatrix.values[rowNo][colNo] =
+        newMatrixValues[rowNo][colNo] =
           this.values[rowNo][colNo] - anotherMatrix.values[rowNo][colNo];
       }
     }
-    return newMatrix;
+    return createMatrix(newMatrixValues);
   }
 
   public Matrix multiply(int multiplier) {
-    Matrix newMatrix = new Matrix(this.rows, this.columns);
+    int[][] newMatrixValues = new int[this.rows][this.columns];
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
-        newMatrix.values[rowNo][colNo] = this.values[rowNo][colNo] * multiplier;
+        newMatrixValues[rowNo][colNo] = this.values[rowNo][colNo] * multiplier;
       }
     }
-    return newMatrix;
+    return createMatrix(newMatrixValues);
   }
 
   public Matrix multiply(Matrix anotherMatrix) {
-    Matrix newMatrix = new Matrix(this.rows, anotherMatrix.columns);
-
     if (this.columns != anotherMatrix.rows) return null;
 
-    for (int rowNo = 0; rowNo < newMatrix.rows; rowNo++) {
-      for (int colNo = 0; colNo < newMatrix.columns; colNo++) {
-        newMatrix.values[rowNo][colNo] = 0;
+    int[][] newMatrixValues = new int[this.rows][this.columns];
+
+    for (int rowNo = 0; rowNo < this.rows; rowNo++) {
+      for (int colNo = 0; colNo < this.columns; colNo++) {
+        newMatrixValues[rowNo][colNo] = 0;
         for (int i = 0; i < this.columns; i++) {
-          newMatrix.values[rowNo][colNo] +=
+          newMatrixValues[rowNo][colNo] +=
             this.values[rowNo][i] * anotherMatrix.values[i][colNo];
         }
       }
     }
-    return newMatrix;
+    return createMatrix(newMatrixValues);
   }
 
   private Matrix getSubMatrix(int rIdx, int cIdx) {
@@ -105,8 +105,7 @@ public class Matrix {
       }
       sRow++;
     }
-    Matrix subMatrix = Matrix.createMatrix(subMatrixValues);
-    return subMatrix;
+    return createMatrix(subMatrixValues);
   }
 
   public Integer getDeterminant() {
