@@ -30,12 +30,14 @@ public class Matrix {
     return newMatrix;
   }
 
+  private boolean isValid(Matrix matrix) {
+    return (this.rows != matrix.rows || this.columns != matrix.columns);
+  }
+
   public Matrix add(Matrix anotherMatrix) {
     Matrix newMatrix = new Matrix(this.rows, this.columns);
 
-    if (
-      this.rows != anotherMatrix.rows || this.columns != anotherMatrix.columns
-    ) return null;
+    if (isValid(anotherMatrix)) return null;
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
@@ -49,9 +51,7 @@ public class Matrix {
   public Matrix sub(Matrix anotherMatrix) {
     Matrix newMatrix = new Matrix(this.rows, this.columns);
 
-    if (
-      this.rows != anotherMatrix.rows || this.columns != anotherMatrix.columns
-    ) return null;
+    if (isValid(anotherMatrix)) return null;
 
     for (int rowNo = 0; rowNo < this.rows; rowNo++) {
       for (int colNo = 0; colNo < this.columns; colNo++) {
@@ -122,10 +122,9 @@ public class Matrix {
     Integer determinant = new Integer(0);
     for (int colNo = 0; colNo < this.columns; colNo++) {
       int sign = colNo % 2 != 0 ? -1 : 1;
-      determinant +=
-        sign *
-        this.values[0][colNo] *
-        this.getSubMatrix(0, colNo).getDeterminant();
+      int multiplier = sign * this.values[0][colNo];
+      int subMatrixDeterminant = this.getSubMatrix(0, colNo).getDeterminant();
+      determinant += multiplier * subMatrixDeterminant;
     }
     return determinant;
   }
@@ -147,9 +146,7 @@ public class Matrix {
     if (this == object) return true;
     if (!(object instanceof Matrix)) return false;
     Matrix matrix = (Matrix) object;
-    if (
-      matrix.columns != this.columns || matrix.rows != this.rows
-    ) return false;
+    if (isValid(matrix)) return false;
 
     for (int rowNo = 0; rowNo < matrix.rows; rowNo++) {
       for (int colNo = 0; colNo < matrix.columns; colNo++) {
