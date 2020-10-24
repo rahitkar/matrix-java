@@ -9,21 +9,21 @@ import org.junit.Test;
 public class MatrixTest {
 
   @Test
-  public void createMatrix() {
+  public void shouldCreateMatrix() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     assertNotNull(mt);
   }
 
   @Test
-  public void createMatrixWithDifferentSizeColumns() {
+  public void shouldReturnNullForDifferentDimensions() {
     int[][] values = { { 1, 2 }, { 3, 4, 5 } };
     Matrix mt = Matrix.createMatrix(values);
-    assertNull(mt);
+    assertEquals(null, mt);
   }
 
   @Test
-  public void addMatrix() {
+  public void shouldAddMatrix() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
@@ -36,27 +36,27 @@ public class MatrixTest {
   }
 
   @Test
-  public void addWithDifferentRowSize() {
+  public void addShouldReturnNullForDifferentRowDimension() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 }, { 5, 6 } };
     Matrix anotherMt = Matrix.createMatrix(anotherValues);
     Matrix actual = mt.add(anotherMt);
-    assertNull(actual);
+    assertEquals(null, actual);
   }
 
   @Test
-  public void addWithDifferentColumnSize() {
+  public void addShouldReturnNullForDifferentColumnDimension() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2, 3 }, { 4, 5, 6 } };
     Matrix anotherMt = Matrix.createMatrix(anotherValues);
     Matrix actual = mt.add(anotherMt);
-    assertNull(actual);
+    assertEquals(null, actual);
   }
 
   @Test
-  public void subMatrix() {
+  public void shouldSubtractWithGivenMatrix() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
@@ -68,27 +68,27 @@ public class MatrixTest {
   }
 
   @Test
-  public void subWithDifferentRowSize() {
+  public void subShouldReturnNullForDifferentRowDimension() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 }, { 5, 6 } };
     Matrix anotherMt = Matrix.createMatrix(anotherValues);
     Matrix actual = mt.sub(anotherMt);
-    assertNull(actual);
+    assertEquals(null, actual);
   }
 
   @Test
-  public void subWithDifferentColumnSize() {
+  public void subShouldReturnNullForDifferentColumnDimension() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2, 3 }, { 4, 5, 6 } };
     Matrix anotherMt = Matrix.createMatrix(anotherValues);
     Matrix actual = mt.sub(anotherMt);
-    assertNull(actual);
+    assertEquals(null, actual);
   }
 
   @Test
-  public void multiplyWithInt() {
+  public void shouldMultiplyWithInt() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     Matrix actual = mt.multiply(2);
@@ -98,7 +98,7 @@ public class MatrixTest {
   }
 
   @Test
-  public void multiplyWithMatrix() {
+  public void shouldMultiplyWithGivenMatrix() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
@@ -110,17 +110,17 @@ public class MatrixTest {
   }
 
   @Test
-  public void multiplyWithDifferentRowSizeMatrix() {
+  public void multiplyShouldReturnNUllForGivenDifferentRowSizeMatrix() {
     int[][] values = { { 1, 2, 3 }, { 4, 5, 6 } };
     Matrix mt = Matrix.createMatrix(values);
     int[][] anotherValues = { { 1, 2 }, { 3, 4 } };
     Matrix anotherMt = Matrix.createMatrix(anotherValues);
     Matrix actual = mt.multiply(anotherMt);
-    assertNull(actual);
+    assertEquals(null, actual);
   }
 
   @Test
-  public void getDeterminant2X2Matrix() {
+  public void getDeterminant_shouldReturnDeterminantOf_2x2_Matrix() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int actual = mt.getDeterminant();
@@ -128,17 +128,17 @@ public class MatrixTest {
   }
 
   @Test
-  public void getDeterminant3X3Matrix() {
+  public void getDeterminant_shouldReturnDeterminantOf_3x3_Matrix() {
     int[][] values = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
     Matrix anotherMt = Matrix.createMatrix(values);
     int actual = anotherMt.getDeterminant();
     assertEquals(0, actual);
   }
 
-  public void getDeterminantOfNotSquareMatrix() {
+  public void getDeterminantShouldReturnNullForNotSquareMatrix() {
     int[][] values = { { 1, 2 }, { 3, 4 } };
     Matrix mt = Matrix.createMatrix(values);
     int actual = mt.getDeterminant();
-    assertNull(actual);
+    assertEquals(null, actual);
   }
 }
